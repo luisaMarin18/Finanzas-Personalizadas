@@ -1,16 +1,26 @@
-# app_demo
+# Finanzas Personalizadas- Aplicación Flutter
 
-A new Flutter project.
+## Descripción
+Finanzas Personalizadas es una aplicación móvil desarrollada en Flutter para la gestión de finanzas personales. Permite a los usuarios:
 
-## Getting Started
+- Registrar cuentas nuevas con usuario y contraseña.
+- Recuperar contraseña si se olvida.
+- Registrar ingresos, gastos diarios y gastos hormiga.
+- Ver un dashboard con un resumen financiero personalizado.
+- Visualizar una gráfica interactiva de ingresos y gastos.
+- Guardar todos los datos localmente para persistencia entre sesiones.
+- Dashboard individual por usuario.
 
-This project is a starting point for a Flutter application.
+## Funcionalidades
+- Login / Registro de usuario.
+- Recuperación de contraseña.
+- Dashboard individualizado.
+- Registro de gastos e ingresos diarios.
+- Gráficas interactivas usando `fl_chart`.
+- Persistencia de datos usando `shared_preferences`.
 
-A few resources to get you started if this is your first Flutter project:
+## Instalación
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/luisaMarin18/Finanzas-Personalizadas.git
