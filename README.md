@@ -1,4 +1,4 @@
-# Finanzas Personalizadas- Aplicación Flutter
+# Finanzas Personalizadas - Aplicación Flutter
 
 ## Descripción
 Finanzas Personalizadas es una aplicación móvil desarrollada en Flutter para la gestión de finanzas personales. Permite a los usuarios:
@@ -19,8 +19,13 @@ Finanzas Personalizadas es una aplicación móvil desarrollada en Flutter para l
 - Gráficas interactivas usando `fl_chart`.
 - Persistencia de datos usando `shared_preferences`.
 
-## Instalación
+## 📂 Estructura
+- `lib/screens/welcome_screen.dart` → Pantalla de inicio de sesión
+- `lib/screens/register_screen.dart` → Pantalla de registro de usuario
+- `lib/screens/dashboard_screen.dart` → Dashboard con ingresos, gastos y gráfica
+- `lib/services/local_storage.dart` → Manejo de datos locales con SharedPreferences
 
+## Instalación
 1. Clonar el repositorio:
 ```bash
 git clone https://github.com/luisaMarin18/Finanzas-Personalizadas.git
