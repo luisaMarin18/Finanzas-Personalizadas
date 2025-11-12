@@ -2,6 +2,8 @@ import 'package:app_demo/services/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
 import 'register_screen.dart';
+import 'package:app_demo/services/biometric_service.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -14,20 +16,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _loginUser() async {
+  uture<void> _loginUser() async {
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
-    if (username.isEmpty || password.isEmpty) {
+   if (username.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Debes llenar ambos campos")),
       );
-      return;
+     return;
     }
 
     String? savedPassword = await LocalStorageService.getUserPassword(username);
 
-    if (savedPassword == null) {
+  if (savedPassword == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Usuario no encontrado")),
       );
@@ -40,6 +42,41 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       );
       return;
     }
+
+    // --- NUEVO: Antes de navegar, intentar autenticación biométrica ---
+    try {
+      final bool biometricAvailable = await BiometricService.isBiometricAvailable();
+      bool authenticated = true; // por defecto true si no hay biometría
+
+      if (biometricAvailable) {
+        // mostrar dialogo biometría (si está disponible)
+        authenticated = await BiometricService.authenticate(
+          reason: 'Verifica tu identidad con huella/Face ID para iniciar sesión',
+        );
+      }
+
+      if (!authenticated) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Autenticación biométrica fallida o cancelada")),
+        );
+        return;
+      }
+    } catch (_) {
+      // En caso de error en biometría, mostramos mensaje y no permitimos acceso
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Error al autenticar biométricamente")),
+      );
+      return;
+    }
+
+    // Si todo está bien (contraseña + biometría si aplica), navegar:
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DashboardScreen(username: username),
+      ),
+    );
+  }
 
     Navigator.pushReplacement(
       context,
